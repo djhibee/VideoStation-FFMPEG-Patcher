@@ -34,7 +34,7 @@ function restart_videostation() {
 
 function end_patch() {
 	echo ""
-	echo "[SUCCESS] Done patching, you can now enjoy your movies ;) (please add a star to the repo if it worked for you)"
+	echo "[SUCCESS] Done patching, you can now enjoy your movies ;)"
 }
 
 
@@ -84,27 +84,28 @@ function armv8_procedure() {
 
 function wrapper_procedure() {
 	echo "[INFO] Running wrapping procedure"
-	echo "[INFO] Saving current ffmpeg as ffmpeg.orig"
-	mv -n /var/packages/VideoStation/target/bin/ffmpeg /var/packages/VideoStation/target/bin/ffmpeg.orig
-
-	echo "[INFO] Downloading ffmpeg-wrapper for VideoStation"
-	wget -q -O - https://github.com/AlexPresso/VideoStation-FFMPEG-Patcher/blob/main/ffmpeg-wrapper.sh?raw=true > /var/packages/VideoStation/target/bin/ffmpeg
-
-  	chown root:VideoStation /var/packages/VideoStation/target/bin/ffmpeg
-  	chmod 750 /var/packages/VideoStation/target/bin/ffmpeg
-  	chmod u+s /var/packages/VideoStation/target/bin/ffmpeg
-
+	
+	# only change advanced media ffmpeg versions and keep video station's one untouched
+	# as in https://github.com/darknebular/Wrapper_VideoStation
+	
   	if [[ -d /var/packages/CodecPack/target/bin ]]; then
   		cpackfiles=($(ls /var/packages/CodecPack/target/bin | grep ffmpeg))
 
   		for file in "${cpackfiles[@]}"
   		do
-  			echo "[INFO] Patching CodecPack's $file..."
-
-  			mv "/var/packages/CodecPack/target/bin/$file" "/var/packages/CodecPack/target/bin/$file.orig"
-  			cp /var/packages/VideoStation/target/bin/ffmpeg "/var/packages/CodecPack/target/bin/$file"
-
-  			chmod 755 "/var/packages/CodecPack/target/bin/$file"
+		      echo "[INFO] Patching CodecPack's $file..."
+		      if  [[ $file = "ffmpeg33" ]] 
+		      then
+  				mv "/var/packages/CodecPack/target/bin/$file" "/var/packages/CodecPack/target/bin/$file.orig"
+  				wget -O - https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg33-wrapper > "/var/packages/CodecPack/target/bin/$file"
+				chmod 755 "/var/packages/CodecPack/target/bin/$file"
+		      elif [[ $file = "ffmpeg41" ]] 
+		      then
+  				mv "/var/packages/CodecPack/target/bin/$file" "/var/packages/CodecPack/target/bin/$file.orig"
+  				wget -O - https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper > "/var/packages/CodecPack/target/bin/$file"
+				chmod 755 "/var/packages/CodecPack/target/bin/$file"
+		      else
+		      		echo "Do not change $file as not in the wrapper requirement list"	       
 		done
 	fi
 
