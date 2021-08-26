@@ -1,10 +1,11 @@
 # VideoStation-FFMPEG-Patcher 
 
-<p>
-  <img src="https://github.com/AlexPresso/VideoStation-FFMPEG-Patcher/blob/main/banner.png?raw=true" height=200px alt="Banner">
-</p>
+This patcher is designed to simplify the installation steps from this [Gist](https://gist.github.com/BenjaminPoncet/bbef9edc1d0800528813e75c1669e57e) and enable **DTS**, **EAC3** and **TrueHD** support to Synology VideoStation by replacing the ffmpeg library files by a wrapper using SynoCommunity ffmpeg.
+Origin: 
+- Benjamin Poncet, the great who made it work initially: https://gist.github.com/BenjaminPoncet/bbef9edc1d0800528813e75c1669e57e
+- darknebular for the optimisation to touch a minimum of codecs and let Videostation untouched: https://github.com/darknebular/Wrapper_VideoStation
+- Alexpresso who wrapped the install in bash script (see parent project)
 
-This patcher is designed to simplify the installation steps from this [Gist](https://gist.github.com/BenjaminPoncet/bbef9edc1d0800528813e75c1669e57e) (huge thanks to [Benjamin Poncet](https://github.com/BenjaminPoncet)) and enable **DTS**, **EAC3** and **TrueHD** support to Synology VideoStation by replacing the ffmpeg library files by a wrapper using SynoCommunity ffmpeg.
 
 ## Supported architectures
 ([check your NAS architecture here](https://github.com/SynoCommunity/spksrc/wiki/Architecture-per-Synology-model))
@@ -28,9 +29,9 @@ This patcher is designed to simplify the installation steps from this [Gist](htt
 
 ## Usage
 Basic command usage:  
-`curl https://raw.githubusercontent.com/AlexPresso/VideoStation-FFMPEG-Patcher/main/patcher.sh | bash`   
+`curl https://raw.githubusercontent.com/djhibee/VideoStation-FFMPEG-Patcher/main/patcher.s | bash`   
 With options:  
-`curl https://raw.githubusercontent.com/AlexPresso/VideoStation-FFMPEG-Patcher/main/patcher.sh | bash -s -- <option>`
+`curl https://raw.githubusercontent.com/djhibee/VideoStation-FFMPEG-Patcher/main/patcher.s | bash -s -- <option>`
 
 | Options | Description |
 | ------ | ----------- |
