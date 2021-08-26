@@ -105,7 +105,8 @@ function wrapper_procedure() {
   				wget -O - https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper > "/var/packages/CodecPack/target/bin/$file"
 				chmod 755 "/var/packages/CodecPack/target/bin/$file"
 		      else
-		      		echo "Do not change $file as not in the wrapper requirement list"	       
+		      		echo "Do not change $file as not in the wrapper requirement list"
+		      fi
 		done
 	fi
 
